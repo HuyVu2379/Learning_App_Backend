@@ -1,0 +1,57 @@
+INSERT INTO courses(courseId,nameCourse, author, price, duration, overview, totalLike, totalShare, createdAt) 
+VALUES ("ABC123","Workout in Home", "Luong Tan Dat", 29.99, '01:30:00', "Full body workout at home", 120, 30, NOW());
+
+INSERT INTO courses(courseId,nameCourse, author, price, duration, overview, totalLike, totalShare, createdAt) 
+VALUES ("ABC1234","Development-Huy", "Huy", 49.99, '02:00:00', "Learn development from scratch", 200, 50, NOW());
+
+INSERT INTO courses(courseId,nameCourse, author, price, duration, overview, totalLike, totalShare, createdAt) 
+VALUES ("ABC1231","Photography-Huy", "Huy", 39.99, '01:45:00', "Master photography skills", 180, 40, NOW());
+
+INSERT INTO courses(courseId,nameCourse, author, price, duration, overview, totalLike, totalShare, createdAt) 
+VALUES ("ABC1232","Music-Huy", "Huy", 24.99, '02:15:00', "Learn to play musical instruments", 150, 25, NOW());
+
+INSERT INTO discounts (discountId, reduce, status, createdAt, updatedAt) VALUES
+(1, '10%', 1, NOW(), NOW()),
+(2, '15%', 1, NOW(), NOW()),
+(3, '20%', 0, NOW(), NOW()),
+(4, '25%', 1, NOW(), NOW()),
+(5, '30%', 1, NOW(), NOW()),
+(6, '5%', 0, NOW(), NOW()),
+(7, '50%', 1, NOW(), NOW()),
+(8, '40%', 1, NOW(), NOW()),
+(9, '35%', 1, NOW(), NOW()),
+(10, '45%', 0, NOW(), NOW());
+
+
+INSERT INTO courses (courseId, nameCourse, author, price, duration, overview, totalLike, totalShare, createdAt, updatedAt) VALUES
+('CRS-20231101-001', 'Introduction to Python', 'John Doe', 19.99, '01:30:00', 'Learn the basics of Python programming.', 120, 45, NOW(), NOW()),
+('CRS-20231101-002', 'Advanced Python', 'Jane Smith', 29.99, '02:15:00', 'Deep dive into advanced Python topics.', 95, 30, NOW(), NOW()),
+('CRS-20231101-003', 'Data Science with Python', 'Alice Johnson', 39.99, '03:00:00', 'Learn data science concepts using Python.', 210, 60, NOW(), NOW()),
+('CRS-20231101-004', 'Web Development with Django', 'Robert Brown', 49.99, '04:00:00', 'Build web applications using Django.', 180, 55, NOW(), NOW()),
+('CRS-20231101-005', 'Machine Learning Basics', 'Chris Davis', 34.99, '02:45:00', 'An introduction to machine learning.', 140, 40, NOW(), NOW()),
+('CRS-20231101-006', 'React for Beginners', 'Emily Wilson', 24.99, '01:50:00', 'Start building web apps with React.', 200, 70, NOW(), NOW()),
+('CRS-20231101-007', 'Node.js Essentials', 'David Martinez', 22.99, '01:40:00', 'Learn the essentials of Node.js.', 150, 35, NOW(), NOW()),
+('CRS-20231101-008', 'Java for Beginners', 'Emma Taylor', 27.99, '02:20:00', 'Beginner-friendly course on Java programming.', 130, 25, NOW(), NOW()),
+('CRS-20231101-009', 'Full Stack Development', 'Michael Anderson', 59.99, '05:00:00', 'Become a full stack developer.', 250, 90, NOW(), NOW()),
+('CRS-20231101-010', 'HTML & CSS Basics', 'Sophia Thomas', 15.99, '01:00:00', 'Learn the fundamentals of HTML and CSS.', 160, 50, NOW(), NOW()),
+('CRS-20231101-011', 'JavaScript Fundamentals', 'Olivia Harris', 20.99, '01:20:00', 'Master JavaScript basics.', 170, 55, NOW(), NOW()),
+('CRS-20231101-012', 'SQL for Data Analysis', 'Isabella Lewis', 29.99, '02:00:00', 'Analyze data using SQL.', 110, 33, NOW(), NOW()),
+('CRS-20231101-013', 'Cloud Computing 101', 'Liam Walker', 44.99, '03:30:00', 'Introduction to cloud computing concepts.', 90, 25, NOW(), NOW()),
+('CRS-20231101-014', 'Cybersecurity Basics', 'James Lee', 39.99, '02:50:00', 'Learn the fundamentals of cybersecurity.', 85, 20, NOW(), NOW()),
+('CRS-20231101-015', 'Artificial Intelligence', 'Ella Young', 54.99, '04:15:00', 'An introduction to artificial intelligence.', 95, 30, NOW(), NOW()),
+('CRS-20231101-016', 'React Native for Mobile Apps', 'Sophia Allen', 37.99, '03:10:00', 'Develop mobile apps with React Native.', 75, 18, NOW(), NOW()),
+('CRS-20231101-017', 'Vue.js Essentials', 'Benjamin King', 26.99, '02:00:00', 'A beginner\'s guide to Vue.js.', 80, 21, NOW(), NOW()),
+('CRS-20231101-018', 'C++ for Game Development', 'Lucas Scott', 41.99, '03:45:00', 'Learn C++ for game development.', 115, 40, NOW(), NOW()),
+('CRS-20231101-019', 'Blockchain Fundamentals', 'Amelia Green', 47.99, '03:20:00', 'Explore the basics of blockchain.', 100, 27, NOW(), NOW()),
+('CRS-20231101-020', 'Data Structures and Algorithms', 'Mia Adams', 32.99, '02:40:00', 'Master data structures and algorithms.', 140, 50, NOW(), NOW());
+
+INSERT INTO categories (nameCategory, iconName, createdAt, updatedAt) VALUES
+('Business', 'business-outline', NOW(), null),
+('Design', 'color-palette-outline', NOW(), NULL),
+('Development', 'megaphone-outline', NOW(), NULL),
+('Photography', 'camera-outline', NOW(), NULL),
+('Music', 'musical-notes-outline', NOW(), NULL),
+('Fitness', 'fitness-outline', NOW(), null)
+
+INSERT INTO category_course (categoryId, courseId, createdAt, updatedAt) VALUES
+(6, 'C010', NOW(), null)
