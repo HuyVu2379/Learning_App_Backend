@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Discount.belongsToMany(models.Course, { through: 'Discount_Course', foreignKey: 'discountId' });
+            Discount.belongsToMany(models.Course, {
+                through: 'discount_course', // Bảng trung gian
+                foreignKey: 'discountId',   // Khóa ngoại của Discount trong bảng trung gian
+                otherKey: 'courseId',       // Khóa ngoại của Course trong bảng trung gian
+                as: 'courses'               // Alias để dễ dàng truy vấn khi cần
+            });
         }
     }
 

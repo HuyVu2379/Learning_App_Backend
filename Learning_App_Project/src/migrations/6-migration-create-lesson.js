@@ -1,31 +1,41 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('categories', {
-            categoryId: {
+        await queryInterface.createTable('lessons', {
+            lessonId: {
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            nameCategory: {
-                type: Sequelize.STRING
+            courseId: {
+                type: Sequelize.STRING,
+                references: {
+                    model: 'courses', // Tên bảng trong cơ sở dữ liệu
+                    key: 'courseId'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: false
             },
-            iconName: {
+            content: {
                 type: Sequelize.STRING,
                 allowNull: false
+            },
+            title: {
+                type: Sequelize.STRING,
             },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('categories');
+        await queryInterface.dropTable('lessons');
     }
 };

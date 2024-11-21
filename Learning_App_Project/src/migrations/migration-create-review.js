@@ -8,25 +8,38 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            courseId: {
+                type: Sequelize.STRING,
+                references: {
+                    model: 'courses', // Tên bảng trong cơ sở dữ liệu
+                    key: 'courseId'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: false
+            },
             content: {
                 type: Sequelize.STRING,
                 allowNull: false
             },
             rate: {
                 type: Sequelize.INTEGER,
+                allowNull: false
             },
             rateTym: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
             relyto: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: true
             },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });

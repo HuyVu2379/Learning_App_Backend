@@ -8,6 +8,26 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            projectId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'projects', // Tên bảng trong cơ sở dữ liệu
+                    key: 'projectId'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: false
+            },
+            userId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'users', // Tên bảng trong cơ sở dữ liệu
+                    key: 'userId'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: false
+            },
             fileUrl: {
                 type: Sequelize.STRING,
                 allowNull: false
@@ -23,7 +43,7 @@ module.exports = {
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });

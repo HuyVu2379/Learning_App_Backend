@@ -1,19 +1,25 @@
 'use strict';
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.createTable('users', {
             userId: {
-                allowNull: false,
+                type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                type: Sequelize.INTEGER
+                allowNull: false
             },
             avartar: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: true
             },
             name: {
                 type: Sequelize.STRING,
                 allowNull: false
+            },
+            expertise: {
+                type: Sequelize.STRING,
+                allowNull: true
             },
             certificate: {
                 type: Sequelize.STRING,
@@ -23,34 +29,23 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: true
             },
-            expertise: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
             typeUser: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false
             },
             createdAt: {
+                type: Sequelize.DATE,
                 allowNull: false,
-                type: Sequelize.DATE
+                defaultValue: Sequelize.NOW
             },
             updatedAt: {
+                type: Sequelize.DATE,
                 allowNull: true,
-                type: Sequelize.DATE
-            },
-            cartId: {
-                type: Sequelize.INTEGER,
-                allowNull: true,
-                references: {
-                    model: 'carts',
-                    key: 'cartId'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'SET NULL'  // Nếu cart bị xóa, cartId trong bảng users sẽ được đặt thành NULL
+                defaultValue: Sequelize.NOW
             }
         });
     },
+
     down: async (queryInterface, Sequelize) => {
         await queryInterface.dropTable('users');
     }

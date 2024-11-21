@@ -3,13 +3,10 @@ import { Model } from 'sequelize';
 
 module.exports = (sequelize, DataTypes) => {
     class Cart extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
         static associate(models) {
-            Cart.hasOne(models.User, { foreignKey: 'cartId' });
+            // Mỗi Cart thuộc về một User (1-1)
+            Cart.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+            // Mỗi Cart có thể chứa nhiều Course
             Cart.hasMany(models.Course, { foreignKey: 'cartId' });
         }
     }
@@ -19,6 +16,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'userId'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
         }
     }, {
         sequelize,

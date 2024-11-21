@@ -1,31 +1,33 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('discounts', {
-            discountId: {
+        await queryInterface.createTable('projects', {
+            projectId: {
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            reduce: {
-                type: Sequelize.STRING,
+            lessonId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'lessons', // Tên bảng trong cơ sở dữ liệu
+                    key: 'lessonId'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
                 allowNull: false
             },
-            startDate: {
-                type: Sequelize.DATE,
-                allowNull: false
-            },
-            endDate: {
-                type: Sequelize.DATE,
-                allowNull: true
-            },
-            imageUrl: {
+            description: {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            status: {
-                type: Sequelize.BOOLEAN,
+            title: {
+                type: Sequelize.INTEGER,
+            },
+            submission_deadline: {
+                type: Sequelize.DATE,
+                allowNull: false
             },
             createdAt: {
                 allowNull: false,
@@ -38,6 +40,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('discounts');
+        await queryInterface.dropTable('projects');
     }
 };

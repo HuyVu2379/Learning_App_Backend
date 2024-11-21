@@ -10,10 +10,20 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // Quan hệ many-to-many với Category qua bảng Category_Course
-            Course.belongsToMany(models.Category, { through: 'Category_Course', foreignKey: 'courseId', otherKey: 'categoryId' });
+            Category.belongsToMany(models.Category, {
+                through: 'category_course', // Bảng trung gian
+                foreignKey: 'courseId',   // Khóa ngoại của Category trong bảng trung gian
+                otherKey: 'categoryId',       // Khóa ngoại của Course trong bảng trung gian
+                as: 'categories'               // Alias để dễ dàng truy vấn khi cần
+            });
 
             // Quan hệ many-to-many với Discount qua bảng Discount_Course
-            Course.belongsToMany(models.Discount, { through: 'Discount_Course', foreignKey: 'courseId', otherKey: 'discountId' });
+            Course.belongsToMany(models.Discount, {
+                through: 'discount_course', // Bảng trung gian
+                foreignKey: 'courseId',   // Khóa ngoại của Discount trong bảng trung gian
+                otherKey: 'discountId',       // Khóa ngoại của Course trong bảng trung gian
+                as: 'discounts'               // Alias để dễ dàng truy vấn khi cần
+            });
 
             // Quan hệ many-to-many với Enrollment (sử dụng model Enrollment như bảng nối)
             Course.belongsToMany(models.User, { through: models.Enrollment, foreignKey: 'courseId', otherKey: 'userId' });
@@ -23,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
 
             // Quan hệ hasMany với Lesson
             Course.hasMany(models.Lesson, { foreignKey: 'courseId' });
+
+            // Quan hệ hasMany với Topic
+            Course.hasMany(models.Topic, { foreignKey: 'courseId' })
         }
     }
 

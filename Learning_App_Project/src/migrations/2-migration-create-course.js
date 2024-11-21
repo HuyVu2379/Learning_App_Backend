@@ -26,28 +26,34 @@ module.exports = {
             },
             totalLike: {
                 type: Sequelize.INTEGER,
+                allowNull: false
             },
             rate: {
-                type: Sequelize.DOUBLE(10, 2)
+                type: Sequelize.DOUBLE(10, 2),
+                allowNull: false
             },
             totalRate: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
             totalLesson: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
             totalShare: {
                 type: Sequelize.INTEGER,
+                allowNull: false
             },
             imageUrl: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: true
             },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });

@@ -9,32 +9,53 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Enrollment.belongsTo(models.Course, { foreignKey: 'courseId' });
-            Enrollment.belongsTo(models.User, { foreignKey: 'userId' });
+            Enrollment.belongsTo(models.Course, { foreignKey: 'courseId', as: 'course' });
+            Enrollment.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
         }
     }
 
     Enrollment.init({
-        enrollmentId: DataTypes.INTEGER,
+        enrollmentId: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         courseId: {
             type: DataTypes.STRING,
             references: {
-                model: 'Course',
+                model: 'courses', // Tên bảng trong cơ sở dữ liệu
                 key: 'courseId'
-            }
+            },
+            allowNull: false
         },
-        categoryId: {
+        userId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Category',
-                key: 'categoryId'
-            }
+                model: 'users', // Tên bảng trong cơ sở dữ liệu
+                key: 'userId'
+            },
+            allowNull: false
         },
-        role: DataTypes.STRING,
-        status: DataTypes.BOOLEAN,
-        progress: DataTypes.INTEGER,
-        enrollment_date: DataTypes.DATE,
-        completion_date: DataTypes.DATE,
+        role: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        progress: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        enrollment_date: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
+        },
+        completion_date: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
     }, {
         sequelize,
         modelName: 'Enrollment'

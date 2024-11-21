@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.createTable('carts', {
@@ -7,6 +8,16 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
                 type: Sequelize.INTEGER
+            },
+            userId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'users', // Tên bảng Users
+                    key: 'userId'   // Cột userId trong bảng Users
+                },
+                onUpdate: 'CASCADE', // Cập nhật tự động khi userId thay đổi
+                onDelete: 'CASCADE', // Xóa tự động khi userId bị xóa
             },
             createdAt: {
                 allowNull: false,
@@ -18,6 +29,7 @@ module.exports = {
             }
         });
     },
+
     down: async (queryInterface, Sequelize) => {
         await queryInterface.dropTable('carts');
     }

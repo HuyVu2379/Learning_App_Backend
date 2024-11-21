@@ -1,28 +1,41 @@
 'use strict';
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('topics', {
+        await queryInterface.createTable('Topics', {
             topicId: {
-                allowNull: false,
+                type: Sequelize.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
-                type: Sequelize.INTEGER
+                autoIncrement: true
             },
             topicName: {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            courseId: {
+                type: Sequelize.STRING,
+                references: {
+                    model: 'courses',  // Tên bảng trong cơ sở dữ liệu
+                    key: 'courseId'    // Khóa chính của bảng Course
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: false
+            },
             createdAt: {
+                type: Sequelize.DATE,
                 allowNull: false,
-                type: Sequelize.DATE
+                defaultValue: Sequelize.NOW
             },
             updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE
+                type: Sequelize.DATE,
+                allowNull: true,
+                defaultValue: Sequelize.NOW
             }
         });
     },
+
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('topics');
+        await queryInterface.dropTable('Topics');
     }
 };
