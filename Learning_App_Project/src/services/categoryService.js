@@ -1,28 +1,24 @@
+import { INTEGER } from 'sequelize';
 import db from '../models/index';
 import { raw } from 'body-parser';
-let getAllCategory = () => {
+let getAllCategory = (limit) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = db.Category.findAll({
-                attributes: ['categoryId', 'nameCategory', 'iconName', 'createdAt', 'updatedAt'],
-                raw: true
-            });
-            resolve(data);
-        } catch (error) {
-            reject(error);
-        }
-    })
-
-}
-let getCategoryRepresent = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let data = db.Category.findAll({
-                attributes: ['categoryId', 'nameCategory', 'iconName', 'createdAt', 'updatedAt'],
-                limit: 6,
-                raw: true
-            });
-            resolve(data);
+            if (limit === 'ALL') {
+                let data = db.Category.findAll({
+                    attributes: ['categoryId', 'nameCategory', 'iconName', 'createdAt', 'updatedAt'],
+                    raw: true
+                });
+                resolve(data);
+            }
+            else {
+                let data = db.Category.findAll({
+                    attributes: ['categoryId', 'nameCategory', 'iconName', 'createdAt', 'updatedAt'],
+                    raw: true,
+                    limit: parseInt(limit)
+                });
+                resolve(data);
+            }
         } catch (error) {
             reject(error);
         }
@@ -31,5 +27,4 @@ let getCategoryRepresent = () => {
 }
 module.exports = {
     getAllCategory: getAllCategory,
-    getCategoryRepresent: getCategoryRepresent
 }

@@ -9,12 +9,24 @@ module.exports = {
                 autoIncrement: true,
                 allowNull: false
             },
+            password: {
+                type: Sequelize.TEXT,
+                allowNull: false
+            },
+            email: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
             avartar: {
                 type: Sequelize.STRING,
                 allowNull: true
             },
             name: {
                 type: Sequelize.STRING,
+                allowNull: false
+            },
+            rate: {
+                type: Sequelize.DOUBLE(10, 2),
                 allowNull: false
             },
             expertise: {

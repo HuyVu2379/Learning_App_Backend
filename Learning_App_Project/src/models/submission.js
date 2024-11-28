@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Submission.init({
-        submitId: DataTypes.INTEGER,
+        submitId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true,
+            autoIncrement: true
+        },
         fileUrl: DataTypes.STRING,
         submitDay: DataTypes.DATE,
         grade: DataTypes.DOUBLE,

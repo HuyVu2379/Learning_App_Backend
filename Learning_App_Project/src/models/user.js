@@ -17,10 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         userId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            unique: true
         },
+        email: DataTypes.STRING,
+        password: DataTypes.TEXT,
         avartar: DataTypes.STRING,
         name: DataTypes.STRING,
+        rate: DataTypes.DOUBLE,
         expertise: DataTypes.STRING,
         certificate: DataTypes.STRING,
         totalRate: DataTypes.INTEGER,

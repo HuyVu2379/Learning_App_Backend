@@ -21,9 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         topicId: {
             type: DataTypes.INTEGER,
             primaryKey: true, // Đảm bảo topicId là khóa chính
-            autoIncrement: true // Tự động tăng
+            autoIncrement: true,
+            unique: true
         },
         topicName: DataTypes.STRING,
+        totalSearch: DataTypes.INTEGER,
         courseId: { // Khóa ngoại đến Course
             type: DataTypes.INTEGER,
             references: {
@@ -32,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
-            allowNull: false // Có thể thay đổi thành true nếu topic có thể không có course
+            allowNull: true // Có thể thay đổi thành true nếu topic có thể không có course
         }
     }, {
         sequelize,

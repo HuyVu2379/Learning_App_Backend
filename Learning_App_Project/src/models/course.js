@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // Quan hệ many-to-many với Category qua bảng Category_Course
-            Category.belongsToMany(models.Category, {
+            Course.belongsToMany(models.Category, {
                 through: 'category_course', // Bảng trung gian
                 foreignKey: 'courseId',   // Khóa ngoại của Category trong bảng trung gian
                 otherKey: 'categoryId',       // Khóa ngoại của Course trong bảng trung gian
@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'courseId',   // Khóa ngoại của Discount trong bảng trung gian
                 otherKey: 'discountId',       // Khóa ngoại của Course trong bảng trung gian
                 as: 'discounts'               // Alias để dễ dàng truy vấn khi cần
+            });
+            Course.belongsToMany(models.Cart, {
+                through: 'cart_course', // Bảng trung gian
+                foreignKey: 'courseId', // Khóa ngoại của Course trong bảng trung gian
+                otherKey: 'cartId',     // Khóa ngoại của Cart trong bảng trung gian
+                as: 'carts'             // Alias để dễ truy vấn
             });
 
             // Quan hệ many-to-many với Enrollment (sử dụng model Enrollment như bảng nối)
@@ -40,7 +46,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Course.init({
-        courseId: DataTypes.STRING,
+        courseId: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+            unique: true,
+
+        },
         nameCourse: DataTypes.STRING,
         author: DataTypes.STRING,
         price: DataTypes.DOUBLE(10, 2),

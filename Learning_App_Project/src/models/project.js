@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Project.init({
-        projectId: DataTypes.INTEGER,
+        projectId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true,
+            autoIncrement: true,
+        },
         description: DataTypes.STRING,
         title: DataTypes.INTEGER,
         submission_deadline: DataTypes.DATE,

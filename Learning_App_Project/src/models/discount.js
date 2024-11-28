@@ -19,7 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Discount.init({
-        discountId: DataTypes.INTEGER,
+        discountId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true,
+            autoIncrement: true,
+        },
+        nameDiscount: DataTypes.STRING,
         reduce: DataTypes.DOUBLE,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,

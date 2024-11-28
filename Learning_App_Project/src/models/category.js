@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         categoryId: {
             type: DataTypes.INTEGER,
             primaryKey: true,          // Đảm bảo categoryId là khóa chính
-            autoIncrement: true
+            autoIncrement: true,
         },
         nameCategory: DataTypes.STRING,
         iconName: DataTypes.STRING

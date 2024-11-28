@@ -8,6 +8,10 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            nameDiscount: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
             reduce: {
                 type: Sequelize.STRING,
                 allowNull: false

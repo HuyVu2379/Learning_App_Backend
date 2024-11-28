@@ -1,37 +1,64 @@
 -- data user 
-INSERT INTO users (userId, avartar, name, certificate, totalRate, expertise, typeUser, createdAt, updatedAt) VALUES
+INSERT INTO users (userId, avartar, name, certificate,rate, totalRate, expertise, typeUser, createdAt, updatedAt,email,password) VALUES
 -- teacher
-(1, 'https://github.com/HuyVu2379/Host-image-file/blob/main/users/teacher01.jpg', 'Trần Trung Đông', 'Software Engineer', 120, 'Java Developer', 1, '2024-11-01 08:00:00', '2024-11-02 10:00:00'),
-(2, 'https://github.com/HuyVu2379/Host-image-file/blob/main/users/student03.jpg', 'Phạm Thị Tuyết Nga', 'Data Analyst', 95, 'Python, SQL', 1, '2024-11-03 09:00:00', '2024-11-04 12:00:00'),
+(1, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/users/teacher01.jpg', 'Trần Trung Đông', 'Software Engineer',4.5, 120, 'Java Developer', 1, '2024-11-01 08:00:00', '2024-11-02 10:00:00','dong@gmail.com','12345678'),
+(2, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/users/student03.jpg', 'Phạm Thị Tuyết Nga', 'Data Analyst',5, 95, 'Python, SQL', 1, '2024-11-03 09:00:00', '2024-11-04 12:00:00','nga@gmail.com','111111'),
 -- student
-(3, 'https://github.com/HuyVu2379/Host-image-file/blob/main/users/teacher02.jpg', 'Hoàng Văn Nam', null, 150, null, 0, '2024-11-05 10:30:00', '2024-11-06 11:45:00'),
-(4, 'https://github.com/HuyVu2379/Host-image-file/blob/main/users/student01.jpg', 'Cao Văn Khánh', null, 200, null, 0, '2024-11-07 14:00:00', '2024-11-08 15:30:00'),
-(5, 'https://github.com/HuyVu2379/Host-image-file/blob/main/users/student02.jpg', 'Đào Trí Tuệ', null, 175, null, 0, '2024-11-09 16:00:00', '2024-11-10 17:30:00');
+(3, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/users/student01.jpg', 'Hoàng Văn Nam', NULL,0, 150, null, 0, '2024-11-05 10:30:00', '2024-11-06 11:45:00','nam@gmail.com','333333'),
+(4, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/users/student02.jpg', 'Cao Văn Khánh', NULL,0, 200, null, 0, '2024-11-07 14:00:00', '2024-11-08 15:30:00','khanh@gmail.com','4444444'),
+(5, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/users/teacher02.jpg', 'Đào Trí Tuệ', NULL,0, 175, null, 0, '2024-11-09 16:00:00', '2024-11-10 17:30:00','tue@gmail.com','555555');
+
+INSERT INTO carts(userId,createdAt,updatedAt) VALUES
+(3,NOW(),NOW())
+
+-- data course
+INSERT INTO courses 
+(courseId, nameCourse, author, price, duration, overview, totalLike, rate, totalRate, totalLesson, totalShare, imageUrl, createdAt, updatedAt) 
+VALUES
+('CRS-20241121-001', 'Introduction to Programming', 'John Doe', 99.99, '02:30:00', 'Learn the basics of programming.', 120, 4.5, 30, 10, 20, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course01.png', '2024-11-21 00:00:00', '2024-11-21 00:00:00'),
+('CRS-20241121-002', 'Advanced JavaScript', 'Jane Smith', 149.99, '03:15:00', 'Master advanced JavaScript techniques.', 200, 4.7, 50, 15, 35, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course02.jpg', '2024-11-21 00:01:00', '2024-11-21 00:01:00'),
+('CRS-20241121-003', 'Web Development Bootcamp JavaScript', 'Alex Johnson', 199.99, '05:00:00', 'A complete guide to web development.', 350, 4.8, 75, 20, 50, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course03.jpg', '2024-11-21 00:02:00', '2024-11-21 00:02:00'),
+('CRS-20241121-004', 'Data Science with Python', 'Emily Davis', 179.99, '04:30:00', 'Dive into data analysis with Python.', 250, 4.6, 60, 18, 40, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course04.jpg', '2024-11-21 00:03:00', '2024-11-21 00:03:00'),
+('CRS-20241121-005', 'Machine Learning Basics', 'Michael Brown', 249.99, '06:00:00', 'Understand the fundamentals of machine learning.', 400, 4.9, 100, 25, 70, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course05.jpg', '2024-11-21 00:04:00', '2024-11-21 00:04:00'),
+('CRS-20241121-006', 'UI/UX Design Principles', 'Sarah Wilson', 129.99, '03:45:00', 'Learn the essentials of UI/UX design.', 180, 4.4, 45, 12, 25, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course06.jpg', '2024-11-21 00:05:00', '2024-11-21 00:05:00'),
+('CRS-20241121-007', 'Introduction to SQL', 'David Lee', 79.99, '02:00:00', 'Master SQL for database management.', 100, 4.3, 20, 8, 15, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course07.jpeg', '2024-11-21 00:06:00', '2024-11-21 00:06:00'),
+('CRS-20241121-008', 'Cloud Computing Fundamentals', 'Laura Clark', 199.99, '05:15:00', 'Explore the basics of cloud computing.', 300, 4.7, 70, 22, 55, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course08.png', '2024-11-21 00:07:00', '2024-11-21 00:07:00'),
+('CRS-20241121-009', 'Cybersecurity Essentials', 'Robert Martin', 159.99, '04:00:00', 'Protect systems and data from threats.', 270, 4.5, 55, 16, 45, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course09.jpg', '2024-11-21 00:08:00', '2024-11-21 00:08:00'),
+('CRS-20241121-010', 'Digital Marketing Strategies', 'Sophia White', 139.99, '03:30:00', 'Boost your brand with digital marketing.', 220, 4.6, 65, 14, 30, 'https://raw.githubusercontent.com/HuyVu2379/Host-image-file/refs/heads/main/courses/course10.jpg', '2024-11-21 00:09:00', '2024-11-21 00:09:00');
 
 
+--data category
+INSERT INTO categories (nameCategory, iconName, createdAt, updatedAt)
+VALUES
+('Technology', 'color-filter-sharp', '2024-11-21 10:00:00', '2024-11-21 10:00:00'),
+('Health & Fitness', 'fitness-outline', '2024-11-21 10:05:00', '2024-11-21 10:05:00'),
+('Education', 'book-outline', '2024-11-21 10:10:00', '2024-11-21 10:10:00'),
+('Business', 'business-outline', '2024-11-21 10:15:00', '2024-11-21 10:15:00'),
+('Lifestyle', 'accessibility-outline', '2024-11-21 10:20:00', '2024-11-21 10:20:00'),
+('Entertainment', 'cafe-outline', '2024-11-21 10:25:00', '2024-11-21 10:25:00'),
+('Travel', 'airplane-outline', '2024-11-21 10:30:00', '2024-11-21 10:30:00'),
+('Food & Drink', 'fast-food-outline', '2024-11-21 10:35:00', '2024-11-21 10:35:00'),
+('Sports', 'football', '2024-11-21 10:40:00', '2024-11-21 10:40:00'),
+('Music', 'musical-notes-outline', '2024-11-21 10:45:00', '2024-11-21 10:45:00');
 
-INSERT INTO discounts (discountId, reduce, status, createdAt, updatedAt) VALUES
-(1, '10%', 1, NOW(), NOW()),
-(2, '15%', 1, NOW(), NOW()),
-(3, '20%', 0, NOW(), NOW()),
-(4, '25%', 1, NOW(), NOW()),
-(5, '30%', 1, NOW(), NOW()),
-(6, '5%', 0, NOW(), NOW()),
-(7, '50%', 1, NOW(), NOW()),
-(8, '40%', 1, NOW(), NOW()),
-(9, '35%', 1, NOW(), NOW()),
-(10, '45%', 0, NOW(), NOW());
 
-
-
-
-INSERT INTO categories (nameCategory, iconName, createdAt, updatedAt) VALUES
-('Business', 'business-outline', NOW(), null),
-('Design', 'color-palette-outline', NOW(), NULL),
-('Development', 'megaphone-outline', NOW(), NULL),
-('Photography', 'camera-outline', NOW(), NULL),
-('Music', 'musical-notes-outline', NOW(), NULL),
-('Fitness', 'fitness-outline', NOW(), null)
-
+--data categoty-course
 INSERT INTO category_course (categoryId, courseId, createdAt, updatedAt) VALUES
-(6, 'C010', NOW(), null)
+(2,"CRS-20241121-010",'2024-11-21 10:00:00', '2024-11-21 10:00:00')
+
+--data discount 
+
+
+INSERT INTO discounts (nameDiscount, reduce, startDate, endDate, imageUrl, status, createdAt, updatedAt)
+VALUES
+('Black Friday Sale', '10%', '2024-11-20 08:00:00', '2024-12-01 23:59:59', 'https://example.com/discount1.png', 1, '2024-11-20 08:00:00', '2024-11-20 08:00:00'),
+('Cyber Monday Special', '15%', '2024-11-21 09:00:00', '2024-12-10 23:59:59', 'https://example.com/discount2.png', 1, '2024-11-21 09:00:00', '2024-11-21 09:00:00'),
+('Holiday Season Deal', '20%', '2024-11-22 10:00:00', '2024-12-15 23:59:59', 'https://example.com/discount3.png', 1, '2024-11-22 10:00:00', '2024-11-22 10:00:00'),
+('Early Bird Discount', '5%', '2024-11-18 07:00:00', '2024-11-30 23:59:59', 'https://example.com/discount4.png', 1, '2024-11-18 07:00:00', '2024-11-18 07:00:00'),
+('Mega Sale', '25%', '2024-11-19 06:00:00', '2024-12-05 23:59:59', 'https://example.com/discount5.png', 1, '2024-11-19 06:00:00', '2024-11-19 06:00:00'),
+('End-of-Year Clearance', '30%', '2024-11-23 11:00:00', '2024-12-20 23:59:59', 'https://example.com/discount6.png', 1, '2024-11-23 11:00:00', '2024-11-23 11:00:00'),
+('Super Saver Deal', '50%', '2024-11-25 09:30:00', '2024-12-25 23:59:59', 'https://example.com/discount7.png', 1, '2024-11-25 09:30:00', '2024-11-25 09:30:00'),
+('Festive Offer', '40%', '2024-11-28 12:00:00', '2024-12-30 23:59:59', 'https://example.com/discount8.png', 1, '2024-11-28 12:00:00', '2024-11-28 12:00:00'),
+('New Year Countdown', '35%', '2024-11-29 14:00:00', '2025-01-01 23:59:59', 'https://example.com/discount9.png', 1, '2024-11-29 14:00:00', '2024-11-29 14:00:00'),
+('Winter Savings', '60%', '2024-12-01 08:00:00', '2025-01-15 23:59:59', 'https://example.com/discount10.png', 1, '2024-12-01 08:00:00', '2024-12-01 08:00:00');
+

@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import db from '../models/index';
 import { raw } from 'body-parser';
 let getAllCourse = (req, res) => {
@@ -53,9 +54,24 @@ let getCoursesInsprires = (categoryId) => {
     });
 };
 
+let getCourseByUser = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = db.Enrollment.findAll({
+                where: {
+                    userId: userId
+                }
+            })
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
 module.exports = {
     getAllCourse: getAllCourse,
     getPopularCourse: getPopularCourse,
-    getCoursesInsprires: getCoursesInsprires
+    getCoursesInsprires: getCoursesInsprires,
+    getCourseByUser: getCourseByUser
 }

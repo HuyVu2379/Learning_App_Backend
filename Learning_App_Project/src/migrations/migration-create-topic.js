@@ -12,6 +12,11 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            totalSearch: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
             courseId: {
                 type: Sequelize.STRING,
                 references: {
@@ -20,7 +25,7 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
-                allowNull: false
+                allowNull: true
             },
             createdAt: {
                 type: Sequelize.DATE,

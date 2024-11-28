@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Lesson.init({
-        lessonId: DataTypes.INTEGER,
+        lessonId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true,
+            autoIncrement: true,
+        },
         content: DataTypes.STRING,
         title: DataTypes.STRING,
     }, {

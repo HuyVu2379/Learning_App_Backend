@@ -7,7 +7,13 @@ module.exports = (sequelize, DataTypes) => {
             // Mỗi Cart thuộc về một User (1-1)
             Cart.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
             // Mỗi Cart có thể chứa nhiều Course
-            Cart.hasMany(models.Course, { foreignKey: 'cartId' });
+            Cart.belongsToMany(models.Course, {
+                through: 'cart_course', // Bảng trung gian
+                foreignKey: 'cartId',   // Khóa ngoại của Cart trong bảng trung gian
+                otherKey: 'courseId',   // Khóa ngoại của Course trong bảng trung gian
+                as: 'courses'           // Alias để dễ truy vấn
+            });
+
         }
     }
 

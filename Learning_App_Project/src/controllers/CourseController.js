@@ -27,8 +27,21 @@ let handleGetCoursesInsprires = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+let handleGetCourseByUser = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const data = await courseService.getCourseByUser(userId);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({
+            errCode: -1,
+            message: "Get course of teach failed"
+        })
+    }
+}
 module.exports = {
     handleGetAllCourse: handleGetAllCourse,
     handleGetPopularCourse: handleGetPopularCourse,
-    handleGetCoursesInsprires: handleGetCoursesInsprires
+    handleGetCoursesInsprires: handleGetCoursesInsprires,
+    handleGetCourseByUser: handleGetCourseByUser
 };
