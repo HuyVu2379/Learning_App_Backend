@@ -19,14 +19,25 @@ let handleGetPopularCourse = async (req, res) => {
 }
 let handleGetCoursesInsprires = async (req, res) => {
     try {
-        const { categoryId } = req.params;
-        const data = await courseService.getCoursesInsprires(categoryId);
+        let { categoryId, limit } = req.query;
+        if (!categoryId || isNaN(categoryId)) {
+            return res.status(400).json({ message: "Invalid categoryId" });
+        }
+        categoryId = parseInt(categoryId);
+        if (limit && limit !== 'ALL') {
+            if (isNaN(limit)) {
+                return res.status(400).json({ message: "Invalid limit" });
+            }
+            limit = parseInt(limit);
+        }
+        const data = await courseService.getCoursesInsprires(categoryId, limit);
         res.status(200).json(data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 let handleGetCourseByUser = async (req, res) => {
     try {
         const { userId } = req.body;

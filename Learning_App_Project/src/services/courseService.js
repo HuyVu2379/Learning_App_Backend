@@ -30,23 +30,21 @@ let getPopularCourse = (req, res) => {
         }
     })
 }
-let getCoursesInsprires = (categoryId) => {
+let getCoursesInsprires = (categoryId, limit) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let query = `
-                SELECT *
-                FROM courses AS c
-                JOIN category_course AS cc ON c.courseId = cc.courseId
-                JOIN categories AS cat ON cc.categoryId = cat.categoryId
-                WHERE cat.categoryId = :categoryId
-            `;
-
-            let courses = await db.sequelize.query(query, {
-                replacements: { categoryId: categoryId },
-                type: db.Sequelize.QueryTypes.SELECT,
-                raw: true
+            let courses = await db.Course.findAll({
+                include: [
+                    {
+                        model: db.Category,
+                        as: "categories",
+                        where: { categoryId: categoryId },
+                        attributes: []
+                    }
+                ],
+                limit: limit,
+                raw: false
             });
-
             resolve(courses);
         } catch (error) {
             reject(error);
