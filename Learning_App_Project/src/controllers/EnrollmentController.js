@@ -3,7 +3,6 @@ import enrollmentService from "../services/enrollmentService";
 
 const handleSaveCourse = async (req, res) => {
     const { courseId, userId } = req.body;
-
     // Kiểm tra dữ liệu đầu vào
     if (!courseId || !userId) {
         return res.status(400).json({

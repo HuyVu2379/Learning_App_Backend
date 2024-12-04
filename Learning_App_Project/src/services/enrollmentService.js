@@ -7,41 +7,49 @@ let saveCourse = (courseId, userId) => {
         try {
             // Kiểm tra nếu người dùng đã đăng ký khóa học
             let enrollment = await findEnrollment(courseId, userId);
-            // Tìm kiêm user để lấy role
-            let user = await userService.findUserById(userId);
+
             // Nếu đã đăng ký, không làm gì cả
             if (enrollment) {
                 resolve({
-                    errCode: -1
-                    , message: 'User already save course'
+                    errCode: -1,
+                    message: 'User already saved the course'
                 });
+                return;  // Dừng tiếp tục thực thi hàm nếu đã có bản ghi
             }
+
+            // Tìm thông tin người dùng để lấy role
+            let user = await userService.findUserById(userId);
 
             // Nếu chưa đăng ký, tạo mới bản ghi Enrollment
             let data = await db.Enrollment.create({
                 courseId: courseId,
                 userId: userId,
-                role: user.data.typeUser,
-                status: 3,
+                role: user.data.typeUser,  // Giả sử bạn lấy role từ thông tin user
+                status: 3,  // Giá trị status, bạn có thể thay đổi nếu cần
                 progress: null,
                 enrollment_date: null,
-                completiton_date: null,
+                completion_date: null,  // Fix typo "completiton_date" thành "completion_date"
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
 
-            return {
-                errCode: 3,
+            resolve({
+                errCode: 0,
                 message: 'Course saved successfully',
                 data: data
-            };
+            });
 
         } catch (error) {
             console.error("Error in saveCourse: ", error);
-            reject(error)
+            reject({
+                errCode: 1,
+                message: 'An error occurred while saving the course',
+                error: error.message
+            });
         }
-    })
-}
+    });
+};
+
 
 let registerCourse = (courseId, userId) => {
     return new Promise(async (resolve, reject) => {

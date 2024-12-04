@@ -12,8 +12,11 @@ let initWebRoutes = (app) => {
     router.get("/api/courses", CourseController.handleGetAllCourse); //ok
     router.get("/api/courses/popular", CourseController.handleGetPopularCourse); //ok
     router.get("/api/courses/inspires", CourseController.handleGetCoursesInsprires); //ok
+    router.get("/api/courses/filterCourse", CourseController.handleSearchCourse); //ok
+    router.get("/api/courses/findCourseById", CourseController.handleFindCourseByID); //ok
     router.get("/api/users/teachers", UserController.handleGetAllTeacher); //ok
-    router.get("/api/courses/topic/:topicName", TopicController.handleFindCourseByTopic);
+    router.get("/api/topic/findCourseByName", TopicController.handleFindCourseByTopic);
+    router.get("/api/topic/getTopics", TopicController.handleFindTopics);
     router.post("/api/courses/save", EnrollmentController.handleSaveCourse);
     router.post("/api/courses/register", EnrollmentController.handleRegisterCourse);
     router.post("/api/cart/addCourseToCart", CartController.handleAddToCart);

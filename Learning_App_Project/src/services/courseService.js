@@ -66,10 +66,36 @@ let getCourseByUser = (userId) => {
         }
     })
 }
+let searchCourseByName = (courseName) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = db.Course.findAll({
+                where: {
+                    courseName: courseName
+                }
+            })
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+let findCourseByID = (courseId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Course.findByPk(courseId)
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
 module.exports = {
     getAllCourse: getAllCourse,
     getPopularCourse: getPopularCourse,
     getCoursesInsprires: getCoursesInsprires,
-    getCourseByUser: getCourseByUser
+    getCourseByUser: getCourseByUser,
+    searchCourseByName: searchCourseByName,
+    findCourseByID: findCourseByID
 }

@@ -50,9 +50,35 @@ let handleGetCourseByUser = async (req, res) => {
         })
     }
 }
+let handleSearchCourse = async (req, res) => {
+    try {
+        const { courseName } = req.query;
+        const data = await courseService.searchCourseByName(courseName);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({
+            errCode: -1,
+            message: "filter course failed"
+        })
+    }
+}
+let handleFindCourseByID = async (req, res) => {
+    try {
+        const { courseId } = req.query;
+        const data = await courseService.findCourseByID(courseId);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({
+            errCode: -1,
+            message: "find course failed"
+        })
+    }
+}
 module.exports = {
     handleGetAllCourse: handleGetAllCourse,
     handleGetPopularCourse: handleGetPopularCourse,
     handleGetCoursesInsprires: handleGetCoursesInsprires,
-    handleGetCourseByUser: handleGetCourseByUser
+    handleGetCourseByUser: handleGetCourseByUser,
+    handleSearchCourse: handleSearchCourse,
+    handleFindCourseByID: handleFindCourseByID
 };
