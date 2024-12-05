@@ -14,7 +14,7 @@ let handleAddToCart = async (req, res) => {
 }
 let handleRemoveFromCart = async (req, res) => {
     try {
-        const { cartId, courseId } = req.body;
+        const { cartId, courseId } = req.query;  // Đọc từ query params
         let data = await cartService.removeFromCart(cartId, courseId);
         return res.status(200).json(data);
     } catch (error) {
@@ -24,7 +24,36 @@ let handleRemoveFromCart = async (req, res) => {
         });
     }
 }
+
+let handleFindCartByUserId = async (req, res) => {
+    try {
+        const { userId } = req.query;
+        let data = await cartService.findCartByUserId(userId);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(500).json({
+            errCode: -3,
+            message: 'Not found cart',
+        });
+    }
+};
+let handleGetAllCourseInCart = async (req, res) => {
+    try {
+        const { cartId } = req.query;
+        let data = await cartService.getAllCourseInCart(cartId);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(500).json({
+            errCode: -3,
+            message: 'Not found cart',
+        });
+    }
+};
+
+
 module.exports = {
     handleAddToCart: handleAddToCart,
-    handleRemoveFromCart: handleRemoveFromCart
+    handleRemoveFromCart: handleRemoveFromCart,
+    handleFindCartByUserId: handleFindCartByUserId,
+    handleGetAllCourseInCart: handleGetAllCourseInCart
 };

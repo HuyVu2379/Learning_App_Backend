@@ -47,7 +47,23 @@ const handleRegisterCourse = async (req, res) => {
         });
     }
 };
+const handleGetAllMyCourse = async (req, res) => {
+    const { userId } = req.query;
+    try {
+        const response = await enrollmentService.getAllMyCourse(userId);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("Error in get My Course: ", error);
+        res.status(500).json({
+            errCode: 1,
+            message: 'An error occurred while saving the course.',
+            error: error.message,
+        });
+    }
+
+};
 module.exports = {
     handleSaveCourse: handleSaveCourse,
-    handleRegisterCourse: handleRegisterCourse
+    handleRegisterCourse: handleRegisterCourse,
+    handleGetAllMyCourse: handleGetAllMyCourse
 };

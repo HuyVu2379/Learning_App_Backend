@@ -42,6 +42,8 @@ let handleGetCourseByUser = async (req, res) => {
     try {
         const { userId } = req.body;
         const data = await courseService.getCourseByUser(userId);
+        console.log(data);
+
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({

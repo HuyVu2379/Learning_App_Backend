@@ -3,6 +3,9 @@ import db from '../models/index';
 let addToCart = async (cartId, courseId) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log("CartId from frontEnd: ", cartId);
+            console.log("courseId from frontEnd: ", courseId);
+
             let cart = await db.Cart.findByPk(cartId, {
                 include: [{ model: db.Course, as: 'courses' }], // Bao gồm quan hệ
                 raw: false
@@ -66,9 +69,38 @@ let removeFromCart = (cartId, courseId) => {
     });
 };
 
-
+let findCartByUserId = (userId) => {
+    return new Promise(async (reslove, reject) => {
+        try {
+            let cart = await db.Cart.findOne({
+                where: { userId: userId }
+            })
+            reslove(cart)
+        } catch (error) {
+            reject(error)
+            console.log(error);
+        }
+    })
+}
+let getAllCourseInCart = (cartId) => {
+    return new Promise(async (reslove, reject) => {
+        try {
+            let cart = await db.Cart.findAll({
+                include: [{ model: db.Course, as: 'courses' }],
+                where: { cartId: cartId },
+                raw: false
+            });
+            reslove(cart)
+        } catch (error) {
+            reject(error)
+            console.log(error);
+        }
+    })
+}
 
 module.exports = {
     addToCart: addToCart,
-    removeFromCart: removeFromCart
+    removeFromCart: removeFromCart,
+    findCartByUserId: findCartByUserId,
+    getAllCourseInCart: getAllCourseInCart
 }

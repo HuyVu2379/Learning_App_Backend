@@ -58,7 +58,7 @@ let registerCourse = (courseId, userId) => {
             let enrollment = await findEnrollment(courseId, userId);
             if (enrollment) {
                 await db.Enrollment.update({
-                    status: 1,
+                    status: 2,
                     progress: 0,
                     enrollment_date: new Date(),
                     completiton_date: null,
@@ -82,7 +82,7 @@ let registerCourse = (courseId, userId) => {
                     courseId: courseId,
                     userId: userId,
                     role: user.data.typeUser,
-                    status: 3,
+                    status: 2,
                     progress: 0,
                     enrollment_date: null,
                     completiton_date: null,
@@ -119,7 +119,43 @@ let findEnrollment = (courseId, userId) => {
         }
     })
 }
+const getAllMyCourse = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Enrollment.findAll({
+
+                where: {
+                    userId: userId // Điều kiện lọc theo userId
+                },
+                attributes: ['enrollmentId', 'status', 'progress'] // Chọn các trường cần thiết từ bảng Enrollment
+                ,
+                include: [
+                    {
+                        model: db.Course, // Model của bảng khóa học
+                        as: "course", // Alias đã định nghĩa trong model Enrollment
+                        attributes: ['courseId', 'nameCourse', 'duration'] // Chọn các trường cần thiết từ bảng Course
+                    }
+                ],
+            });
+
+            // Nếu cần định dạng dữ liệu, map qua kết quả
+            const result = data.map((enrollment) => ({
+                enrollmentId: enrollment.enrollmentId,
+                status: enrollment.status,
+                progress: enrollment.progress,
+                course: enrollment.course // Thông tin khóa học được liên kết
+            }));
+
+            resolve(result);
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+
 module.exports = {
     saveCourse: saveCourse,
-    registerCourse: registerCourse
+    registerCourse: registerCourse,
+    getAllMyCourse: getAllMyCourse
 }
